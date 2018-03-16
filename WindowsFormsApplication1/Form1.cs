@@ -263,8 +263,7 @@ namespace WindowsFormsApplication1
         {
             if (!_tracking) return;
             var htmlWeb = new HtmlWeb();
-            htmlWeb.Load("http://kluwert.se/groovy/stattest.php?pc=" + Environment.MachineName + "&version=" +
-                         HelperClass.Sanitize(version));
+            htmlWeb.Load("URL FOR TRACKING DATA");
         }
 
         private void CheckKeys(object sender, KeyPressEventArgs e)
