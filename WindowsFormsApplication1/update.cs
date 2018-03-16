@@ -20,9 +20,9 @@ namespace WindowsFormsApplication1
         private void GatherInfo()
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(@"http://kluwert.se/groovy/update.xml");
+            xmlDoc.Load(@"INSERT YOUR XML PATH HERE");
             if (xmlDoc.DocumentElement == null) return;
-            var nodeList = xmlDoc.DocumentElement.SelectNodes("/GroovySound");
+            var nodeList = xmlDoc.DocumentElement.SelectNodes("/);
 
             if (nodeList != null)
                 foreach (XmlNode node in nodeList)
