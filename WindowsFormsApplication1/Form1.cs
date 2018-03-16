@@ -513,7 +513,7 @@ namespace WindowsFormsApplication1
             try
             {
                 var url =
-                    $"http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=97be004c555375dec1f9455cafbf2ae1&artist={artist.Trim()}&track={currSong.Trim()}&format=json";
+                    $"http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=##APIKET###&artist={artist.Trim()}&track={currSong.Trim()}&format=json";
 
                 var response = JsonConvert.DeserializeObject<LastFMInfo>(new WebClient().DownloadString(url));
 
@@ -540,7 +540,7 @@ namespace WindowsFormsApplication1
             try
             {
                 var url =
-                    $"http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist={artist.Trim()}&api_key=97be004c555375dec1f9455cafbf2ae1&limit=10&format=json";
+                    $"http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist={artist.Trim()}&api_key=##APIKET###&limit=10&format=json";
 
                 var response = JsonConvert.DeserializeObject<SimArt>(new WebClient().DownloadString(url));
                 foreach (var relatedArtists in response.similarartists.artist)
