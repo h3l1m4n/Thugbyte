@@ -1,0 +1,112 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.List<WindowsFormsApplication1.song>>
+<!DOCTYPE html>
+<html ng-app="playerApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="../content/css/normalize.css">
+    <link rel="stylesheet" href="../content/css/style.css">
+    <link rel="stylesheet" href="../content/css/font-awesome.min.css">
+</head>
+<body ng-controller="mainCtrl">
+<header>
+    <div class="header__controls">
+        <div class="logo">
+            <a href="#">ThugByte</a>
+        </div>
+        <div class="volume-control">
+            <a class="volume__down" href="javascript:void(0);" ng-click="volumeDown()">
+                <i class="fa fa-volume-down"></i>
+            </a>
+            <div class="volume__level" player-volume="">
+                <span style="width: {{volumeLevel}}% "></span>
+            </div>
+            <a class="volume__up" href="javascript:void(0);" ng-click="volumeUp()">
+                <i class="fa fa-volume-up"></i>
+            </a>
+        </div>
+        <div class="playback-control">
+            <a class="playback__prev" href="javascript:void(0);" ng-click="playbackPrev()">
+                <i class="fa fa-step-backward"></i>
+            </a>
+            <a class="playback__play-pause" href="javascript:void(0);" ng-click="playbackPlayPause()">
+                <i class="fa" ng-class="{true:'fa-play', false:'fa-pause'}[playerPaused]"></i>
+            </a>
+            <a class="playback__next" href="javascript:void(0);" ng-click="playbackNext()">
+                <i class="fa fa-step-forward"></i>
+            </a>
+        </div>
+        <div class="library-search">
+            <input id="search-input" name="search-input" type="text" placeholder="Search..." onkeypress="searchKeyPress(event);" >
+           
+           
+			 <select id="SourceController">
+  <option value="s1">Source 1</option>
+  <option value="s3">Source 3</option>
+</select> 
+        </div>
+    </div>
+    <div class="header__playback-info">
+        <div class="playback-info">
+            <div class="playback-info__time-current">{{ playbackTimeCurrent }}</div>
+            <div class="playback-info__song">{{ playbackSong }}</div>
+            <div class="playback-info__time-total">{{ playbackTimeTotal }}</div>
+        </div>
+        <div class="playback-progress" playback-progress="">
+            <span id="playback-progress__slider" style="width: {{ playbackProgress }}%;"></span>
+        </div>
+    </div>
+    <div class="header__section-titles">
+        <div class="title-library">
+            <div class="library-sections">
+                <div class="song">Track</div>
+                <div class="artist">Artist</div>
+                <div class="album">Time</div>
+				 <div class="Download">Download</div>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="playlist">
+    <ul id="playlist-list">
+
+        @foreach (var track in Model)
+        {
+            <li filter:searchKeyword ng-click="playSongOnClick($event)" ng-class="{playing: item.playing}" data-filename="@track.URL">
+                <div class="song">@track.Songname</div>
+                <div class="artist">@track.Artist</div>
+                <div class="album">@track.SecToMin()</div>
+				<a href="@track.URL" download="@track.URL">
+				 <img border="0" src="../content/img/dl.png" width="25" height="25">
+</a>
+            </li>
+        }
+
+    </ul>
+</div>
+<div id="loading"></div>
+<div id="player-container">
+    <audio id="player" audio-ended="" audio-timeupdate="" controls></audio>
+</div>
+<script src="../content/js/angular.min.js"></script>
+<script src="../content/js/jquery-1.10.2.js"></script>
+<script src="../content/js/id3.js"></script>
+<script src="../content/js/app.js"></script>
+    <script>      
+	
+	$("#search-input").keyup(function(event){
+    if(event.keyCode == 13){
+        openInNewTab();
+    }
+});
+	
+	
+        function openInNewTab()
+		{
+			
+window.open("/" +document.getElementById('SourceController').value + "/" + document.getElementById('search-input').value,"_self");
+        }
+    
+    </script>
+</body>
+</html>

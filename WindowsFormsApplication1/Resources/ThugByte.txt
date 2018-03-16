@@ -1,0 +1,9 @@
+[Common]
+Path=c:\
+ShowLyrics=True
+Username=Master
+Network=False
+Adress=127.0.0.1
+Port=8888
+AlbumArt=True
+RelatedArtist=True
